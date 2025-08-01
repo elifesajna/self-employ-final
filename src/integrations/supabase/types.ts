@@ -19,6 +19,7 @@ export type Database = {
           created_at: string
           id: string
           password_hash: string
+          role: string
           updated_at: string
           username: string
         }
@@ -26,6 +27,7 @@ export type Database = {
           created_at?: string
           id?: string
           password_hash: string
+          role?: string
           updated_at?: string
           username: string
         }
@@ -33,6 +35,7 @@ export type Database = {
           created_at?: string
           id?: string
           password_hash?: string
+          role?: string
           updated_at?: string
           username?: string
         }
@@ -396,7 +399,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      admin_role: "admin" | "super_admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -523,6 +526,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      admin_role: ["admin", "super_admin"],
+    },
   },
 } as const
