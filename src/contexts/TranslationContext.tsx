@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 export interface Translation {
   id: string;
@@ -13,6 +13,7 @@ interface TranslationContextType {
   getTranslation: (id: string) => Translation;
   isEditMode: boolean;
   setEditMode: (mode: boolean) => void;
+  canEdit: boolean;
 }
 
 const defaultTranslations: Record<string, Translation> = {
@@ -251,9 +252,38 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 
 export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [translations, setTranslations] = useState<Record<string, Translation>>(defaultTranslations);
-  const [isEditMode, setEditMode] = useState(false);
+  const [isEditMode, setEditModeState] = useState(false);
+  
+  // Check if user is super admin (we need to import useAuth after the context is created)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  useEffect(() => {
+    // Check admin status from localStorage since we can't use useAuth here (circular dependency)
+    const adminData = localStorage.getItem('admin');
+    if (adminData) {
+      try {
+        const admin = JSON.parse(adminData);
+        setIsSuperAdmin(admin?.role === 'super_admin');
+      } catch (error) {
+        setIsSuperAdmin(false);
+      }
+    }
+  }, []);
+
+  const setEditMode = (mode: boolean) => {
+    // Only allow edit mode for super admins
+    if (mode && !isSuperAdmin) {
+      return;
+    }
+    setEditModeState(mode);
+  };
 
   const updateTranslation = (id: string, english: string, malayalam: string) => {
+    // Only allow updates if user is super admin and in edit mode
+    if (!isSuperAdmin || !isEditMode) {
+      return;
+    }
+    
     setTranslations(prev => ({
       ...prev,
       [id]: {
@@ -279,7 +309,8 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
       updateTranslation,
       getTranslation,
       isEditMode,
-      setEditMode
+      setEditMode,
+      canEdit: isSuperAdmin && isEditMode
     }}>
       {children}
     </TranslationContext.Provider>

@@ -2,9 +2,16 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Edit, Check } from 'lucide-react';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useAuth } from '@/components/AuthContext';
 
 const EditModeToggle: React.FC = () => {
   const { isEditMode, setEditMode } = useTranslation();
+  const { isSuperAdmin } = useAuth();
+
+  // Only show the toggle for super admins
+  if (!isSuperAdmin) {
+    return null;
+  }
 
   return (
     <Button

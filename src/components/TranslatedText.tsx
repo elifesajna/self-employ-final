@@ -19,7 +19,7 @@ const TranslatedText: React.FC<TranslatedTextProps> = ({
   as: Component = 'span',
   showMalayalam = true 
 }) => {
-  const { getTranslation, updateTranslation, isEditMode } = useTranslation();
+  const { getTranslation, updateTranslation, canEdit } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [editEnglish, setEditEnglish] = useState('');
   const [editMalayalam, setEditMalayalam] = useState('');
@@ -43,7 +43,7 @@ const TranslatedText: React.FC<TranslatedTextProps> = ({
     setEditMalayalam('');
   };
 
-  if (isEditMode && translation.editable && isEditing) {
+  if (canEdit && translation.editable && isEditing) {
     return (
       <Card className="inline-block min-w-0 max-w-md">
         <CardContent className="p-3 space-y-2">
@@ -88,9 +88,9 @@ const TranslatedText: React.FC<TranslatedTextProps> = ({
   );
 
   return (
-    <Component className={`${className} ${isEditMode && translation.editable ? 'relative group cursor-pointer border border-dashed border-transparent hover:border-primary/50 hover:bg-primary/5 p-1 rounded' : ''}`}>
+    <Component className={`${className} ${canEdit && translation.editable ? 'relative group cursor-pointer border border-dashed border-transparent hover:border-primary/50 hover:bg-primary/5 p-1 rounded' : ''}`}>
       {content}
-      {isEditMode && translation.editable && (
+      {canEdit && translation.editable && (
         <Button
           size="sm"
           variant="ghost"

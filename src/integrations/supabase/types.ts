@@ -19,7 +19,7 @@ export type Database = {
           created_at: string
           id: string
           password_hash: string
-          role: string
+          role: Database["public"]["Enums"]["admin_role"]
           updated_at: string
           username: string
         }
@@ -27,7 +27,7 @@ export type Database = {
           created_at?: string
           id?: string
           password_hash: string
-          role?: string
+          role?: Database["public"]["Enums"]["admin_role"]
           updated_at?: string
           username: string
         }
@@ -35,7 +35,7 @@ export type Database = {
           created_at?: string
           id?: string
           password_hash?: string
-          role?: string
+          role?: Database["public"]["Enums"]["admin_role"]
           updated_at?: string
           username?: string
         }
@@ -392,6 +392,14 @@ export type Database = {
       hash_password: {
         Args: { password: string }
         Returns: string
+      }
+      verify_admin_login: {
+        Args: { username_param: string; password_param: string }
+        Returns: {
+          id: string
+          username: string
+          role: Database["public"]["Enums"]["admin_role"]
+        }[]
       }
       verify_password: {
         Args: { username: string; password: string }

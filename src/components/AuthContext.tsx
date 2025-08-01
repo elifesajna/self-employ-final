@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 interface Admin {
   id: string;
   username: string;
+  role: 'admin' | 'super_admin';
 }
 
 interface AuthContextType {
@@ -11,6 +12,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
+  isSuperAdmin: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -38,32 +40,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (username: string, password: string) => {
     try {
-      // Call the verify_password function
-      const { data, error } = await supabase.rpc('verify_password', {
-        username,
-        password
+      // Call the verify_admin_login function that returns role
+      const { data, error } = await supabase.rpc('verify_admin_login', {
+        username_param: username,
+        password_param: password
       });
 
       if (error) {
         return { success: false, error: error.message };
       }
 
-      if (!data) {
+      if (!data || data.length === 0) {
         return { success: false, error: 'Invalid username or password' };
       }
 
-      // Get admin data
-      const { data: adminData, error: adminError } = await supabase
-        .from('admins')
-        .select('id, username')
-        .eq('username', username)
-        .single();
+      const adminData = data[0];
+      const adminUser: Admin = {
+        id: adminData.id,
+        username: adminData.username,
+        role: adminData.role
+      };
 
-      if (adminError || !adminData) {
-        return { success: false, error: 'Failed to get admin data' };
-      }
-
-      const adminUser = { id: adminData.id, username: adminData.username };
       setAdmin(adminUser);
       localStorage.setItem('admin', JSON.stringify(adminUser));
 
@@ -78,8 +75,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem('admin');
   };
 
+  const isSuperAdmin = admin?.role === 'super_admin';
+
   return (
-    <AuthContext.Provider value={{ admin, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ admin, isLoading, login, logout, isSuperAdmin }}>
       {children}
     </AuthContext.Provider>
   );
