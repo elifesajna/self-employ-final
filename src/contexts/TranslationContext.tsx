@@ -271,16 +271,12 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
   }, []);
 
   const setEditMode = (mode: boolean) => {
-    // Only allow edit mode for super admins
-    if (mode && !isSuperAdmin) {
-      return;
-    }
     setEditModeState(mode);
   };
 
   const updateTranslation = (id: string, english: string, malayalam: string) => {
-    // Only allow updates if user is super admin and in edit mode
-    if (!isSuperAdmin || !isEditMode) {
+    // Allow updates when in edit mode
+    if (!isEditMode) {
       return;
     }
     
@@ -310,7 +306,7 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
       getTranslation,
       isEditMode,
       setEditMode,
-      canEdit: isSuperAdmin && isEditMode
+      canEdit: isEditMode
     }}>
       {children}
     </TranslationContext.Provider>

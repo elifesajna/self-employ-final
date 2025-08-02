@@ -8,11 +8,7 @@ const EditModeToggle: React.FC = () => {
   const { isEditMode, setEditMode } = useTranslation();
   const { isSuperAdmin } = useAuth();
 
-  // Only show the toggle for super admins
-  if (!isSuperAdmin) {
-    return null;
-  }
-
+  // Show the toggle for everyone
   return (
     <Button
       variant={isEditMode ? "default" : "outline"}
