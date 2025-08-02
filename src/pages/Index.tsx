@@ -34,8 +34,13 @@ const Index = () => {
   const [subProjects, setSubProjects] = useState<Record<string, SubProject[]>>({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { admin, logout } = useAuth();
+  const {
+    toast
+  } = useToast();
+  const {
+    admin,
+    logout
+  } = useAuth();
   useEffect(() => {
     if (activeTab === "home") {
       fetchCategoriesData();
@@ -113,8 +118,8 @@ const Index = () => {
         {/* Hero Section */}
         <div className="relative overflow-hidden bg-gradient-hero">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5"></div>
-          <div className="relative container mx-auto px-4 py-16 sm:py-24">
-            <div className="text-center animate-fade-in">
+          <div className="relative container mx-auto px-4 py-16 sm:py-24 bg-pink-100">
+            <div className="text-center animate-fade-in bg-pink-50">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold mb-6">
                 <span className="text-gradient">
                   <TranslatedText id="hero.title1" showMalayalam={false} />
@@ -220,8 +225,7 @@ const Index = () => {
                 <Users className="h-4 w-4" />
                 <TranslatedText id="nav.checkStatus" showMalayalam={false} />
               </Button>
-              {admin ? (
-                <>
+              {admin ? <>
                   <Button variant={activeTab === "admin" ? "default" : "ghost"} onClick={() => navigate('/admin')} className={`flex items-center gap-2 transition-all duration-200 ${activeTab === "admin" ? "bg-gradient-primary text-primary-foreground shadow-md" : "hover:bg-primary/10"}`}>
                     <Shield className="h-4 w-4" />
                     <TranslatedText id="nav.admin" showMalayalam={false} />
@@ -230,13 +234,10 @@ const Index = () => {
                     <LogOut className="h-4 w-4" />
                     <TranslatedText id="nav.logout" showMalayalam={false} />
                   </Button>
-                </>
-              ) : (
-                <Button variant="outline" onClick={() => navigate('/admin/login')} className="flex items-center gap-2 hover:bg-primary/10 transition-all duration-200">
+                </> : <Button variant="outline" onClick={() => navigate('/admin/login')} className="flex items-center gap-2 hover:bg-primary/10 transition-all duration-200">
                   <Shield className="h-4 w-4" />
                   <TranslatedText id="nav.adminLogin" showMalayalam={false} />
-                </Button>
-              )}
+                </Button>}
             </div>
             
             {/* Mobile Navigation */}
