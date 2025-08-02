@@ -39,15 +39,19 @@ const CategoryCard = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
-  // Generate different solid colors for each card based on category ID
+  // Generate different vibrant colors for each card based on category ID
   const getCardColor = (categoryId: string) => {
     const colors = [
-      "bg-primary/20 border-primary/30",
-      "bg-secondary border-secondary/50", 
-      "bg-accent/30 border-accent/50",
-      "bg-muted border-muted-foreground/30",
-      "bg-primary/15 border-primary/40",
-      "bg-accent/20 border-accent/40"
+      "bg-blue-100 border-blue-300 hover:bg-blue-200", // Light blue
+      "bg-green-100 border-green-300 hover:bg-green-200", // Light green
+      "bg-purple-100 border-purple-300 hover:bg-purple-200", // Light purple
+      "bg-orange-100 border-orange-300 hover:bg-orange-200", // Light orange
+      "bg-pink-100 border-pink-300 hover:bg-pink-200", // Light pink
+      "bg-teal-100 border-teal-300 hover:bg-teal-200", // Light teal
+      "bg-indigo-100 border-indigo-300 hover:bg-indigo-200", // Light indigo
+      "bg-yellow-100 border-yellow-300 hover:bg-yellow-200", // Light yellow
+      "bg-red-100 border-red-300 hover:bg-red-200", // Light red
+      "bg-cyan-100 border-cyan-300 hover:bg-cyan-200" // Light cyan
     ];
     
     // Use category ID to consistently assign colors
@@ -59,7 +63,7 @@ const CategoryCard = ({
   const handleViewDetails = () => {
     navigate(`/category/${category.id}`);
   };
-  return <Card className={`w-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${cardColor} hover:shadow-glow`}>
+  return <Card className={`w-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${cardColor}`}>
       <CardHeader className="pb-3 bg-card/60 backdrop-blur-sm rounded-t-lg">
         <div className="flex items-center justify-between">
           <div className="flex-1">
