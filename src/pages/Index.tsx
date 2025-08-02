@@ -117,15 +117,15 @@ const Index = () => {
             <div className="text-center animate-fade-in">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold mb-6">
                 <span className="text-gradient">
-                  <TranslatedText id="hero.title1" />
+                  <TranslatedText id="hero.title1" showMalayalam={false} />
                 </span>
                 <br />
                 <span className="text-foreground">
-                  <TranslatedText id="hero.title2" />
+                  <TranslatedText id="hero.title2" showMalayalam={false} />
                 </span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-                <TranslatedText id="hero.subtitle" />
+                <TranslatedText id="hero.subtitle" showMalayalam={false} />
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 animate-slide-up">

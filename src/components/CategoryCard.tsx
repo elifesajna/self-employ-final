@@ -39,27 +39,27 @@ const CategoryCard = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
-  // Generate different gradient styles for each card based on category ID
-  const getCardGradient = (categoryId: string) => {
-    const gradients = [
-      "bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20",
-      "bg-gradient-to-br from-secondary via-muted to-secondary/50", 
-      "bg-gradient-to-br from-accent/30 via-primary/20 to-muted",
-      "bg-gradient-to-br from-primary/15 via-accent/25 to-secondary",
-      "bg-gradient-to-br from-muted via-primary/15 to-accent/20",
-      "bg-gradient-to-br from-accent/20 via-secondary to-primary/10"
+  // Generate different solid colors for each card based on category ID
+  const getCardColor = (categoryId: string) => {
+    const colors = [
+      "bg-primary/20 border-primary/30",
+      "bg-secondary border-secondary/50", 
+      "bg-accent/30 border-accent/50",
+      "bg-muted border-muted-foreground/30",
+      "bg-primary/15 border-primary/40",
+      "bg-accent/20 border-accent/40"
     ];
     
-    // Use category ID to consistently assign gradients
+    // Use category ID to consistently assign colors
     const hash = categoryId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return gradients[hash % gradients.length];
+    return colors[hash % colors.length];
   };
 
-  const cardGradient = getCardGradient(category.id);
+  const cardColor = getCardColor(category.id);
   const handleViewDetails = () => {
     navigate(`/category/${category.id}`);
   };
-  return <Card className={`w-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] border border-border/50 ${cardGradient} hover:shadow-glow`}>
+  return <Card className={`w-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${cardColor} hover:shadow-glow`}>
       <CardHeader className="pb-3 bg-card/60 backdrop-blur-sm rounded-t-lg">
         <div className="flex items-center justify-between">
           <div className="flex-1">
