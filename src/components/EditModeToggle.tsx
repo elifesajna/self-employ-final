@@ -23,12 +23,12 @@ const EditModeToggle: React.FC = () => {
       {isEditMode ? (
         <>
           <Check className="h-4 w-4 mr-2" />
-          Exit Edit
+          Exit AI Edit
         </>
       ) : (
         <>
           <Edit className="h-4 w-4 mr-2" />
-          Edit Text
+          AI Editable
         </>
       )}
     </Button>
