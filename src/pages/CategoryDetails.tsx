@@ -138,11 +138,19 @@ const CategoryDetails = () => {
   };
 
   if (loading) {
-    return <div className="container mx-auto p-6">Loading...</div>;
+    return (
+      <div className="container mx-auto p-6">
+        <TranslatedText id="common.loading" />
+      </div>
+    );
   }
 
   if (!category) {
-    return <div className="container mx-auto p-6">Category not found</div>;
+    return (
+      <div className="container mx-auto p-6">
+        <TranslatedText id="common.categoryNotFound" />
+      </div>
+    );
   }
 
   return (
@@ -150,7 +158,7 @@ const CategoryDetails = () => {
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-6">
         <Button variant="outline" onClick={() => navigate('/')} size="sm">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          <TranslatedText id="common.back" showMalayalam={false} />
+          <TranslatedText id="common.back" />
         </Button>
         <div className="flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold">{category.name}</h1>
@@ -163,21 +171,21 @@ const CategoryDetails = () => {
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-6">
         <Button onClick={() => navigate(`/add-program?category=${category.id}`)} className="text-sm sm:text-base">
           <Plus className="h-4 w-4 mr-2" />
-          <TranslatedText id="hero.addNewProgram" showMalayalam={false} />
+          <TranslatedText id="hero.addNewProgram" />
         </Button>
         <Button variant="outline" onClick={() => navigate(`/add-sub-project?category=${category.id}`)} className="text-sm sm:text-base">
           <Plus className="h-4 w-4 mr-2" />
-          <TranslatedText id="card.subProject" showMalayalam={false} />
+          <TranslatedText id="card.subProject" />
         </Button>
       </div>
 
       <Tabs defaultValue="programs" className="w-full">
         <TabsList className="w-full grid grid-cols-2">
           <TabsTrigger value="programs" className="text-xs sm:text-sm">
-            <TranslatedText id="card.programs" showMalayalam={false} /> ({programs.length})
+            <TranslatedText id="card.programs" /> ({programs.length})
           </TabsTrigger>
           <TabsTrigger value="subprojects" className="text-xs sm:text-sm">
-            <TranslatedText id="card.subProjects" showMalayalam={false} /> ({subProjects.length})
+            <TranslatedText id="card.subProjects" /> ({subProjects.length})
           </TabsTrigger>
         </TabsList>
 
@@ -185,7 +193,9 @@ const CategoryDetails = () => {
           {programs.length === 0 ? (
             <Card>
               <CardContent className="pt-6">
-                <p className="text-center text-muted-foreground">No programs found</p>
+                <p className="text-center text-muted-foreground">
+                  <TranslatedText id="common.noProgramsFound" />
+                </p>
               </CardContent>
             </Card>
           ) : (
@@ -236,7 +246,9 @@ const CategoryDetails = () => {
           {subProjects.length === 0 ? (
             <Card>
               <CardContent className="pt-6">
-                <p className="text-center text-muted-foreground">No sub-projects found</p>
+                <p className="text-center text-muted-foreground">
+                  <TranslatedText id="common.noSubProjectsFound" />
+                </p>
               </CardContent>
             </Card>
           ) : (

@@ -8,6 +8,7 @@ import { ArrowLeft, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import TranslatedText from "@/components/TranslatedText";
 
 interface Program {
   id: string;
@@ -101,7 +102,11 @@ const AllProgramsList = () => {
 
 
   if (loading) {
-    return <div className="container mx-auto p-6">Loading...</div>;
+    return (
+      <div className="container mx-auto p-6">
+        <TranslatedText id="common.loading" />
+      </div>
+    );
   }
 
   return (
@@ -109,9 +114,11 @@ const AllProgramsList = () => {
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-6">
         <Button variant="outline" onClick={() => navigate('/')} size="sm">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back
+          <TranslatedText id="common.back" />
         </Button>
-        <h1 className="text-2xl sm:text-3xl font-bold">All Programs</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold">
+          <TranslatedText id="nav.allPrograms" />
+        </h1>
       </div>
 
       <div className="mb-6">
@@ -128,18 +135,32 @@ const AllProgramsList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg sm:text-xl">Programs Table</CardTitle>
-          <CardDescription className="text-sm sm:text-base">All programs with detailed information</CardDescription>
+          <CardTitle className="text-lg sm:text-xl">
+            <TranslatedText id="allPrograms.tableTitle" />
+          </CardTitle>
+          <CardDescription className="text-sm sm:text-base">
+            <TranslatedText id="allPrograms.tableDescription" />
+          </CardDescription>
         </CardHeader>
         <CardContent className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-xs sm:text-sm">Program Name</TableHead>
-                <TableHead className="text-xs sm:text-sm">Category</TableHead>
-                <TableHead className="text-xs sm:text-sm hidden md:table-cell">Description</TableHead>
-                <TableHead className="text-xs sm:text-sm hidden lg:table-cell">Conditions</TableHead>
-                <TableHead className="text-xs sm:text-sm">Actions</TableHead>
+                <TableHead className="text-xs sm:text-sm">
+                  <TranslatedText id="table.programName" />
+                </TableHead>
+                <TableHead className="text-xs sm:text-sm">
+                  <TranslatedText id="table.category" />
+                </TableHead>
+                <TableHead className="text-xs sm:text-sm hidden md:table-cell">
+                  <TranslatedText id="table.description" />
+                </TableHead>
+                <TableHead className="text-xs sm:text-sm hidden lg:table-cell">
+                  <TranslatedText id="table.conditions" />
+                </TableHead>
+                <TableHead className="text-xs sm:text-sm">
+                  <TranslatedText id="table.actions" />
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -156,12 +177,12 @@ const AllProgramsList = () => {
                   </TableCell>
                   <TableCell className="max-w-xs hidden md:table-cell">
                     <div className="truncate text-xs sm:text-sm" title={program.description}>
-                      {program.description || 'No description'}
+                      {program.description || <TranslatedText id="common.noDescription" />}
                     </div>
                   </TableCell>
                   <TableCell className="max-w-xs hidden lg:table-cell">
                     <div className="truncate text-xs sm:text-sm" title={program.conditions}>
-                      {program.conditions || 'No conditions'}
+                      {program.conditions || <TranslatedText id="common.noConditions" />}
                     </div>
                   </TableCell>
                   <TableCell>
@@ -171,7 +192,7 @@ const AllProgramsList = () => {
                       onClick={() => navigate(`/category/${program.category_id}`)}
                       className="text-xs sm:text-sm"
                     >
-                      View
+                      <TranslatedText id="common.view" />
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -184,7 +205,11 @@ const AllProgramsList = () => {
       {filteredPrograms.length === 0 && !loading && (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
-            {searchTerm ? 'No programs found matching your search.' : 'No programs available.'}
+            {searchTerm ? (
+              <TranslatedText id="common.noProgramsMatchingSearch" />
+            ) : (
+              <TranslatedText id="common.noProgramsAvailable" />
+            )}
           </p>
         </div>
       )}
