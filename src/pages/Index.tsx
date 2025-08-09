@@ -11,6 +11,9 @@ import CheckRegistration from "@/components/CheckRegistration";
 import CategoryCard from "@/components/CategoryCard";
 import TranslatedText from "@/components/TranslatedText";
 import EditModeToggle from "@/components/EditModeToggle";
+import { useMemberAuth } from "@/contexts/MemberAuthContext";
+import { Link } from "react-router-dom";
+import { User } from "lucide-react";
 interface Category {
   id: string;
   name: string;
@@ -41,6 +44,7 @@ const Index = () => {
     admin,
     logout
   } = useAuth();
+  const { member, logout: memberLogout, isAuthenticated } = useMemberAuth();
   useEffect(() => {
     if (activeTab === "home") {
       fetchCategoriesData();
@@ -205,9 +209,30 @@ const Index = () => {
       <nav className="bg-card/80 backdrop-blur-md border-b border-border/50 sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">
-              <TranslatedText id="brand.name" />
-            </h1>
+            <div className="flex items-center gap-4">
+              <h1 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">
+                <TranslatedText id="brand.name" />
+              </h1>
+              {isAuthenticated ? (
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <User className="h-4 w-4" />
+                    <span>{member?.mobile_number}</span>
+                  </div>
+                  <Button variant="outline" size="sm" onClick={memberLogout}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Link to="/member/auth">
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    <TranslatedText id="auth.login" />
+                  </Button>
+                </Link>
+              )}
+            </div>
             <div className="hidden md:flex space-x-2">
               <Button variant={activeTab === "home" ? "default" : "ghost"} onClick={() => setActiveTab("home")} className={`flex items-center gap-2 transition-all duration-200 ${activeTab === "home" ? "bg-gradient-primary text-primary-foreground shadow-md" : "hover:bg-primary/10"}`}>
                 <Home className="h-4 w-4" />

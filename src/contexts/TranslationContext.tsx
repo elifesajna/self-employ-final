@@ -62,6 +62,74 @@ const defaultTranslations: Record<string, Translation> = {
     malayalam: 'ഇലൈഫ് സൊസൈറ്റിയുമായി നിങ്ങളുടെ അഭിരുചി തിരഞ്ഞെടുക്കുക',
     editable: true
   },
+
+  // Member Authentication
+  'auth.memberTitle': {
+    id: 'auth.memberTitle',
+    english: 'Member Authentication',
+    malayalam: 'അംഗ പ്രാമാണീകരണം',
+    editable: true
+  },
+  'auth.memberSubtitle': {
+    id: 'auth.memberSubtitle',
+    english: 'Login with your registered mobile number',
+    malayalam: 'നിങ്ങളുടെ രജിസ്റ്റർ ചെയ്ത മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് ലോഗിൻ ചെയ്യുക',
+    editable: true
+  },
+  'auth.login': {
+    id: 'auth.login',
+    english: 'Login',
+    malayalam: 'ലോഗിൻ',
+    editable: true
+  },
+  'auth.register': {
+    id: 'auth.register',
+    english: 'Register',
+    malayalam: 'രജിസ്റ്റർ',
+    editable: true
+  },
+  'auth.mobileNumber': {
+    id: 'auth.mobileNumber',
+    english: 'Mobile Number',
+    malayalam: 'മൊബൈൽ നമ്പർ',
+    editable: true
+  },
+  'auth.verificationCode': {
+    id: 'auth.verificationCode',
+    english: 'Verification Code',
+    malayalam: 'സ്ഥിരീകരണ കോഡ്',
+    editable: true
+  },
+  'auth.verify': {
+    id: 'auth.verify',
+    english: 'Verify',
+    malayalam: 'സ്ഥിരീകരിക്കുക',
+    editable: true
+  },
+  'auth.find': {
+    id: 'auth.find',
+    english: 'Find',
+    malayalam: 'കണ്ടെത്തുക',
+    editable: true
+  },
+  'auth.registerDescription': {
+    id: 'auth.registerDescription',
+    english: 'Find your profile by mobile number from the agents hierarchy',
+    malayalam: 'ഏജന്റുമാരുടെ ശ്രേണിയിൽ നിന്ന് മൊബൈൽ നമ്പർ വഴി നിങ്ങളുടെ പ്രൊഫൈൽ കണ്ടെത്തുക',
+    editable: true
+  },
+  'common.backToHome': {
+    id: 'common.backToHome',
+    english: 'Back to Home',
+    malayalam: 'ഹോമിലേക്ക് മടങ്ങുക',
+    editable: true
+  },
+  'common.back': {
+    id: 'common.back',
+    english: 'Back',
+    malayalam: 'തിരികെ',
+    editable: true
+  },
   'hero.subtitle': {
     id: 'hero.subtitle',
     english: 'Discover exclusive employment opportunities, professional development programs, and career advancement resources tailored to your success.',
@@ -158,12 +226,6 @@ const defaultTranslations: Record<string, Translation> = {
   },
 
   // Common Actions
-  'common.back': {
-    id: 'common.back',
-    english: 'Back',
-    malayalam: 'തിരിച്ച്',
-    editable: true
-  },
   'common.edit': {
     id: 'common.edit',
     english: 'Edit',
