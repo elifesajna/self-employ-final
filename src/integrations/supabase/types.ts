@@ -384,6 +384,39 @@ export type Database = {
           },
         ]
       }
+      team_members: {
+        Row: {
+          created_at: string
+          id: string
+          is_verified: boolean | null
+          mobile_number: string
+          name: string | null
+          updated_at: string
+          verification_code: string | null
+          verification_expires_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_verified?: boolean | null
+          mobile_number: string
+          name?: string | null
+          updated_at?: string
+          verification_code?: string | null
+          verification_expires_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_verified?: boolean | null
+          mobile_number?: string
+          name?: string | null
+          updated_at?: string
+          verification_code?: string | null
+          verification_expires_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -393,6 +426,10 @@ export type Database = {
         Args: { password: string }
         Returns: string
       }
+      send_verification_code: {
+        Args: { mobile_number_param: string }
+        Returns: Json
+      }
       verify_admin_login: {
         Args: { username_param: string; password_param: string }
         Returns: {
@@ -400,6 +437,10 @@ export type Database = {
           username: string
           role: Database["public"]["Enums"]["admin_role"]
         }[]
+      }
+      verify_member_login: {
+        Args: { mobile_number_param: string; verification_code_param: string }
+        Returns: Json
       }
       verify_password: {
         Args: { username: string; password: string }
