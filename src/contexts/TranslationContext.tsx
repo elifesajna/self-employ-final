@@ -56,16 +56,10 @@ const defaultTranslations: Record<string, Translation> = {
   },
 
   // Hero Section
-  'hero.title1': {
-    id: 'hero.title1',
-    english: 'Transform Your Career',
-    malayalam: 'നിങ്ങളുടെ കരിയർ മാറ്റിമറിക്കുക',
-    editable: true
-  },
-  'hero.title2': {
-    id: 'hero.title2',
-    english: 'with E-Life Society',
-    malayalam: 'ഇ-ലൈഫ് സൊസൈറ്റിയുമായി',
+  'hero.mainTitle': {
+    id: 'hero.mainTitle',
+    english: 'Select your passion with Elife Society',
+    malayalam: 'ഇലൈഫ് സൊസൈറ്റിയുമായി നിങ്ങളുടെ അഭിരുചി തിരഞ്ഞെടുക്കുക',
     editable: true
   },
   'hero.subtitle': {
